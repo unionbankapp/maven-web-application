@@ -1,5 +1,5 @@
 node{
-def mavenHome = tool name: 'maven3..9.7'
+def mavenHome = tool name: 'maven3.9.7'
 
   echo "The job name is : ${env.JOB_NAME}"
   echo "The Build number is : ${env.BUILD_NUMBER}"
@@ -9,7 +9,7 @@ def mavenHome = tool name: 'maven3..9.7'
 stage('CheckoutCode')
 {git branch: 'development', credentialsId: 'c9ccd6b1-6002-4c17-a70b-2d24cb93d31b', url: 'https://github.com/unionbankapp/maven-web-application.git'}
 //Build
-/*stage ('Build')
+stage ('Build')
 {sh "${mavenHome}/bin/mvn clean package"}
 // Execute SonarQube Report
 stage('ExecuteSonarQubeReport')
@@ -25,5 +25,5 @@ stage ('DeployApp')
 {sshagent(['1f2806d8-9e83-4738-9cb3-ada293c876cd']) 
     // some block
 {sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.233.104.29:/opt/apache-tomcat-9.0.89/webapps/"}}
-*/
+
 }//node closing
