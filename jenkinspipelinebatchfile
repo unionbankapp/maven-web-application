@@ -1,5 +1,5 @@
 node{
-try{
+/*try{*/
 def mavenHome = tool name: 'maven3.9.7'
 echo "The job name is : ${env.JOB_NAME}"
 echo "The Build number is : ${env.BUILD_NUMBER}"
@@ -29,12 +29,16 @@ stage ('DeployApp')
 {sshagent(['1f2806d8-9e83-4738-9cb3-ada293c876cd']) 
     // some block
 {
-sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@43.204.145.41:/opt/apache-tomcat-9.0.89/webapps/"}}
-} //try closing
+sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.13.190:/opt/apache-tomcat-9.0.89/webapps/"}}
+/*} //try closing
+
 catch(e){currentBuild.result="FAILURE"}
+
 finally{sendSlackNotifications(currentBuild.result)}
-}//node closing
+*/}//node closing
+/*
 //Function for SlackNotifications
+
 def sendSlackNotifcations(String buildStatus = 'STARTED') {
   // build status of null means successful
   buildStatus =  buildStatus ?: 'SUCCESS'
@@ -44,19 +48,16 @@ def sendSlackNotifcations(String buildStatus = 'STARTED') {
   def colorCode = '#FF0000'
   def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
   def summary = "${subject} (${env.BUILD_URL})"
-
   // Override default values based on build status
   if (buildStatus == 'STARTED') {
     colorName = 'YELLOW'
     colorCode = '#FFFF00'
   } else if (buildStatus == 'SUCCESS') {
     colorName = 'GREEN'
-    colorCode = '#00FF00'
-  } else {
-    colorName = 'RED'
-    colorCode = '#FF0000'
-  }
-
+    colorCode = '#00FF00'}
+else {    colorName = 'RED'
+    colorCode = '#FF0000' }
   // Send notifications
   slackSend (color: colorCode, message: summary)
 }
+*/
