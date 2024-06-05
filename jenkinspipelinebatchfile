@@ -29,7 +29,7 @@ stage ('DeployApp')
 {sshagent(['1f2806d8-9e83-4738-9cb3-ada293c876cd']) 
     // some block
 {
-sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.13.190:/opt/apache-tomcat-9.0.89/webapps/"}}
+sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@43.204.145.41:/opt/apache-tomcat-9.0.89/webapps/"}}
 } //try closing
 catch(e){currentBuild.result="FAILURE"}
 finally{sendSlackNotifications(currentBuild.result)}
